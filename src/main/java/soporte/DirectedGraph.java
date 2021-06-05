@@ -97,4 +97,19 @@ public class DirectedGraph<T> extends Graph<T>
         res.append("\n]");
         return res.toString();
     }
+
+    @Override
+    public String recorrerEnProfundidad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String recorrerEnAmplitud() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int contarComponentesConexas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -1,5 +1,10 @@
 package interfaz;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
 import soporte.*;
 
 /**
@@ -96,6 +101,7 @@ public class Principal
         ug2.addArc("B", "C");
         ug2.addArc("B", "E");
         ug2.addArc("B", "D");
+        ug2.addArc("B", "B");
         ug2.addArc("C", "G");
         ug2.addArc("C", "E");
         ug2.addArc("C", "H");
@@ -105,5 +111,104 @@ public class Principal
         
         System.out.println("Grafo no dirigido: ");
         System.out.println(ug2);
+        System.out.println("En profundidad");
+        System.out.println(ug2.recorrerEnProfundidad());
+        System.out.println("En Amplitud");
+        System.out.println(ug2.recorrerEnAmplitud());
+        System.out.println("Cantidad Componentes conexas");
+        System.out.println(ug2.contarComponentesConexas());
+        
+        UndirectedGraph <String> ug3 = new UndirectedGraph<>(true);
+        
+        ug3.add("A");
+        ug3.add("B");
+        ug3.add("C");
+        ug3.add("D");
+        ug3.add("E");
+        ug3.add("F");
+        ug3.add("G");
+        ug3.add("H");
+        ug3.add("I");
+        
+        ug3.addArc("A", "B");
+        ug3.addArc("A", "D");
+        ug3.addArc("B", "C");
+        ug3.addArc("B", "D");
+        ug3.addArc("C", "D");
+        ug3.addArc("C", "E");
+        ug3.addArc("D", "E");
+        ug3.addArc("F", "G");
+        ug3.addArc("F", "H");
+        ug3.addArc("G", "H");
+        
+        System.out.println("Grafo no dirigido (para recorrer profe): ");
+        System.out.println(ug3);
+        System.out.println("En profundidad");
+        System.out.println(ug3.recorrerEnProfundidad());
+        System.out.println("En Amplitud");
+        System.out.println(ug3.recorrerEnAmplitud());
+        System.out.println("Cantidad Componentes conexas");
+        System.out.println(ug3.contarComponentesConexas());
+        
+        UndirectedGraph <String> ug4 = new UndirectedGraph<>(true);
+        File myObj = new File("C:\\UTN\\DLC\\graph\\graph.txt");
+        
+        try (Scanner myReader = new Scanner(myObj)) {
+            while(myReader.hasNextLine()){
+                Scanner line = new Scanner(myReader.nextLine());
+                Iterator it = line.useDelimiter(" ");
+                if(it.hasNext()){
+                    String strNodo = (String) it.next();
+                    ug4.add(strNodo);
+                }
+            }
+            
+            Scanner myReader2 = new Scanner(myObj);
+            while(myReader2.hasNextLine()){
+                Scanner line = new Scanner(myReader2.nextLine());
+                Iterator it = line.useDelimiter(" ");
+                if(it.hasNext()){
+                    String strNodoInit = (String) it.next();
+                    while(it.hasNext()){
+                        String strNodoFin = (String) it.next();
+                        if(Integer.parseInt(strNodoFin) > Integer.parseInt(strNodoInit)){
+                            ug4.addArc(strNodoInit, strNodoFin);
+                        }
+                    }
+                }
+            }
+            
+            System.out.println("Grafo no dirigido (desafio): ");
+            System.out.println(ug4);
+            System.out.println("En profundidad");
+            System.out.println(ug4.recorrerEnProfundidad());
+            System.out.println("En Amplitud");
+            System.out.println(ug4.recorrerEnAmplitud());
+            System.out.println("Cantidad Componentes conexas");
+            System.out.println(ug4.contarComponentesConexas());
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        
+        DirectedGraph <String> dg1 = new DirectedGraph<>();
+        dg1.add("a");
+        dg1.add("b");
+        dg1.add("c");
+        dg1.add("d");
+        dg1.add("e");
+        dg1.add("f");
+        
+        dg1.addArc("a", "b", 2);
+        dg1.addArc("b", "c", 2);  // paralelo: no debe permitirlo...
+        dg1.addArc("d", "b", 3);
+        dg1.addArc("e", "d", 1);
+        dg1.addArc("e", "f", 4);
+        dg1.addArc("f", "d", 4);
+        dg1.addArc("f", "c", 4);
+        System.out.println("Grafo 3 (dirigido - sin arcos paralelos: ");
+        System.out.println(dg1);
+        System.out.println();
     }
 }

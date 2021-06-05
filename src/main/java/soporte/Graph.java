@@ -1,5 +1,6 @@
 package soporte;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -22,6 +23,8 @@ public abstract class Graph <T> implements Cloneable
     
     // un flag para recordar si el grafo acepta o no arcos paralelos...
     protected boolean allow_parallel_arcs;
+    
+    protected HashMap<Node, Boolean> visitados;
     
     /**
      * Crea un grafo con lista de vértices vacía, lista de arcos vacía y sin 
@@ -425,6 +428,11 @@ public abstract class Graph <T> implements Cloneable
         if( k < 0 || k >= vertices.size() ) { return -1; }
         return vertices.get(k).getArcs().size();
     }
+    
+    public abstract String recorrerEnProfundidad();
+    public abstract String recorrerEnAmplitud();
+    
+    public abstract int contarComponentesConexas();
     
     @Override
     public String toString()
